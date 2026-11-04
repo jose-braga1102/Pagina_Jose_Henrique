@@ -365,7 +365,7 @@ img {
 .info-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 90px 24px;
+  padding: 90px 24px 40px;
 }
 
 .info-box {
@@ -629,7 +629,7 @@ img {
    ========================================================================== */
 .equipe-section {
   background-color: var(--bg-primary);
-  padding: 100px 0 80px;
+  padding: 50px 0 80px;
 }
 
 .equipe-members {
@@ -1005,6 +1005,15 @@ img {
    RESPONSIVE DESIGN (MOBILE & TABLET)
    ========================================================================== */
 @media (max-width: 900px) {
+
+  .info-container {
+  padding: 50px 24px;
+}
+
+.equipe-section {
+  padding: 40px 0 50px;
+}
+
   body {
     padding-top: 70px;
   }
