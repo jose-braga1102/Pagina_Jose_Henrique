@@ -2,18 +2,32 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="shortcut icon" href="icone.png" type="image/x-icon"/>
-  <title>Odontologia Reishtatter</title>
+  <title>Dr. José Zaneboni | Cirurgião-Dentista • CRO-SP 179225</title>
+  
+  <!-- Typography: Cormorant Garamond (Headings) & Plus Jakarta Sans (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="style.css"/>
   <script defer src="app.js"></script>
 </head>
 <body>
   <header class="header">
     <nav class="nav">
-      <a href="index.html" class="logo">Odontologia Reishtatter</a>
-      <button class="hamburger" aria-label="Abrir menu de navegação" aria-expanded="false"></button>
+      <a href="index.html" class="logo">
+        <span class="logo-name">Dr. José Zaneboni</span>
+        <span class="logo-subtitle">Cirurgião-Dentista • CRO-SP 179225</span>
+      </a>
+      <button class="hamburger" aria-label="Abrir menu de navegação" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <ul class="nav-list">
         <li><a href="#sobre-consultorio">Quem Somos</a></li>
         <li><a href="#tratamentos">Tratamentos</a></li>
@@ -24,154 +38,170 @@
   </header>
 
   <main>
+    <!-- Hero / Intro Section -->
     <section class="intro-section fade-in">
       <div class="intro-container">
         <div class="intro-text">
-          <h2>Odontologia Reishtatter: Consultório Odontoclínica</h2>
-          <p>Somos um consultório odontoclínica comprometido com seu sorriso. Atuamos com excelência, cuidado e tecnologia de ponta.</p>
-          <a href="https://wa.link/8b4pun" class="btn-contato" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-whatsapp"></i>
-            Fale Conosco
-          </a>
-          <a href="https://www.instagram.com/reishtatter.odontologia" class="btn-instagram" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-instagram"></i>
-            Nosso Instagram
-          </a>
+          <span class="badge-tag">Odontologia de Excelência</span>
+          <h2>Dr. José Zaneboni</h2>
+          <p class="intro-crm">Cirurgião-Dentista • CRO-SP 179225</p>
+          <p class="intro-desc">Um ambiente acolhedor e sofisticado dedicado à harmonia do seu sorriso. Cuidado individualizado com as mais avançadas tecnologias clínicas e estética de alto padrão.</p>
+          <div class="intro-actions">
+            <a href="https://wa.link/8b4pun" class="btn-contato" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-whatsapp"></i>
+              Agendar Consulta
+            </a>
+            <a href="https://www.instagram.com/reishtatter.odontologia" class="btn-instagram" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-instagram"></i>
+              Instagram
+            </a>
+          </div>
         </div>
         <div class="hero">
           <div class="carousel" aria-live="polite">
             <img src="slide1.png" class="carousel-img active" alt="Consultório 1"/>
             <img src="slide2.png" class="carousel-img" alt="Consultório 2"/>
             <img src="slide3.png" class="carousel-img" alt="Consultório 3"/>
-            <button class="carousel-btn prev" aria-label="Esquerda">❮</button>
-            <button class="carousel-btn next" aria-label="Direita">❯</button>
+            <button class="carousel-btn prev" aria-label="Anterior">❮</button>
+            <button class="carousel-btn next" aria-label="Próximo">❯</button>
           </div>
         </div>
       </div>
     </section>
     
+    <!-- Sobre o Consultório -->
     <section class="info-container fade-in">
       <div id="sobre-consultorio" class="quemsomos info-box">
         <div class="quemsomos-content">
           <div class="quemsomos-image">
-            <img src="tratamento1.jpg" alt="Imagem do consultório" />
+            <img src="tratamento1.jpg" alt="Instalações do consultório" />
           </div>
           <div class="quemsomos-text">
-            <h2>Sobre o consultório:</h2>
-            <p>Ano de fundação etc.</p>
+            <span class="badge-tag">Espaço Clínico</span>
+            <h2>Sobre o Consultório</h2>
+            <p>Projetado para oferecer uma experiência de bem-estar absoluto e tranquilidade, o consultório do Dr. José Zaneboni combina biossegurança rigorosa, ambiente calmo e equipamentos de última geração.</p>
+            <p>Nosso propósito é aliar precisão técnica, diagnóstico humanizado e tratamentos odontológicos duradouros, preservando sempre a sua naturalidade e saúde oral.</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Tratamentos -->
     <section id="tratamentos" class="tratamentos-section">
-      <h1>Tratamentos:</h1>
-      <p>Conheça nossos tratamentos personalizados.</p>
+      <div class="section-header">
+        <span class="badge-tag">Procedimentos</span>
+        <h1>Tratamentos Especializados</h1>
+        <p>Soluções completas e sob medida em odontologia estética, reabilitadora e preventiva.</p>
+      </div>
+
       <div class="tratamentos-container-wrapper">
-        <button class="scroll-btn left" aria-label="Esquerda">❮</button>
+        <button class="scroll-btn left" aria-label="Rolar para esquerda">❮</button>
         <div class="tratamentos-container" id="tratamentos-scroll">
           <div class="tratamento-item">
-            <img src="tratamento1.jpg" alt="Tratamento 1"/>
+            <img src="tratamento1.jpg" alt="Reabilitação Oral"/>
             <div class="tratamento-info">
-              <h3>Tratamento 1</h3>
-              <p>Descrição curta do Tratamento 1...</p>
+              <h3>Reabilitação Oral</h3>
+              <p>Restauração integral da função mastigatória e harmonia estética do sorriso.</p>
               <button class="saiba-mais-btn" 
-                      data-title="Tratamento 1" 
-                      data-description="Descrição detalhada do Tratamento 1." 
+                      data-title="Reabilitação Oral" 
+                      data-description="Tratamento multidisciplinar planejado detalhadamente para restabelecer a mastigação, fonação e a harmonia estética do paciente." 
                       data-img="tratamento1.jpg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
-            <img src="tratamento2.jpg" alt="Tratamento 2"/>
+            <img src="tratamento2.jpg" alt="Lentes de Contato Dental"/>
             <div class="tratamento-info">
-              <h3>Tratamento 2</h3>
-              <p>Descrição curta do Tratamento 2...</p>
+              <h3>Lentes de Contato</h3>
+              <p>Lâminas cerâmicas ultrafinas para alinhamento e tom perfeitos.</p>
               <button class="saiba-mais-btn" 
-                      data-title="Tratamento 2" 
-                      data-description="Descrição detalhada do Tratamento 2." 
+                      data-title="Lentes de Contato Dental" 
+                      data-description="Procedimento estético refinado que corrige imperfeições de cor, formato e proporções dos dentes com máxima preservação biológica." 
                       data-img="tratamento2.jpg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
-            <img src="tratamento3.jpg" alt="Tratamento 3"/>
+            <img src="tratamento3.jpg" alt="Clareamento Dental"/>
             <div class="tratamento-info">
-              <h3>Tratamento 3</h3>
-              <p>Descrição curta do Tratamento 3...</p>
+              <h3>Clareamento Dental</h3>
+              <p>Técnicas modernas para iluminar seu sorriso com segurança e conforto.</p>
               <button class="saiba-mais-btn" 
-                      data-title="Tratamento 3" 
-                      data-description="Descrição detalhada do Tratamento 3." 
+                      data-title="Clareamento Dental" 
+                      data-description="Protocolos em consultório e combinados para promover um sorriso mais jovem e luminoso sem comprometer a sensibilidade." 
                       data-img="tratamento3.jpg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
-            <img src="tratamento4.jpg" alt="Tratamento 4"/>
+            <img src="tratamento4.jpg" alt="Implantes Dentários"/>
             <div class="tratamento-info">
-              <h3>Tratamento 4</h3>
-              <p>Descrição curta do Tratamento 4...</p>
+              <h3>Implantes Dentários</h3>
+              <p>Substituição definitiva e natural para dentes perdidos.</p>
               <button class="saiba-mais-btn" 
-                      data-title="Tratamento 4" 
-                      data-description="Descrição detalhada do Tratamento 4." 
+                      data-title="Implantes Dentários" 
+                      data-description="Tecnologia guiada e titânio de alta biocompatibilidade para recuperação segura e estável da arcada dentária." 
                       data-img="tratamento4.jpg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
-            <img src="tratamento5.jpg" alt="Tratamento 5"/>
+            <img src="tratamento5.jpg" alt="Ortodontia Invisível"/>
             <div class="tratamento-info">
-              <h3>Tratamento 5</h3>
-              <p>Descrição curta do Tratamento 5...</p>
+              <h3>Alinhadores Invisíveis</h3>
+              <p>Correção ortodôntica discreta, confortável e removível.</p>
               <button class="saiba-mais-btn" 
-                      data-title="Tratamento 5" 
-                      data-description="Descrição detalhada do Tratamento 5." 
+                      data-title="Alinhadores Invisíveis" 
+                      data-description="Alinhamento dental previsível através de placas transparentes feitas sob medida para sua rotina diária." 
                       data-img="tratamento5.jpg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
-            <img src="tratamento6.jpg" alt="Tratamento 6"/>
+            <img src="tratamento6.jpg" alt="Endodontia"/>
             <div class="tratamento-info">
-              <h3>Tratamento 6</h3>
-              <p>Descrição curta do Tratamento 6...</p>
+              <h3>Endodontia Guiada</h3>
+              <p>Tratamento de canal preciso, confortável e tecnológico.</p>
               <button class="saiba-mais-btn" 
-                      data-title="Tratamento 6" 
-                      data-description="Descrição detalhada do Tratamento 6." 
+                      data-title="Endodontia Guiada" 
+                      data-description="Utilização de microscopia operatória e instrumentos automatizados para salvar o dente natural de forma indolor." 
                       data-img="tratamento6.jpg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
-            <img src="tratamento7.jpg" alt="Tratamento 7"/>
+            <img src="tratamento7.jpg" alt="Periodontia"/>
             <div class="tratamento-info">
-              <h3>Tratamento 7</h3>
-              <p>Descrição curta do Tratamento 7...</p>
+              <h3>Saúde Periodontal</h3>
+              <p>Cuidado e tratamento biológico da gengiva e estruturas de suporte.</p>
               <button class="saiba-mais-btn" 
-                      data-title="Tratamento 7" 
-                      data-description="Descrição detalhada do Tratamento 7." 
+                      data-title="Saúde Periodontal" 
+                      data-description="Controle e tratamento de inflamações gengivais, garantindo a sustentação e longevidade dos seus dentes." 
                       data-img="tratamento7.jpg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
-            <img src="tratamento8.jpg" alt="Tratamento 8"/>
+            <img src="tratamento8.jpg" alt="Harmonização Orofacial"/>
             <div class="tratamento-info">
-              <h3>Tratamento 8</h3>
-              <p>Descrição curta do Tratamento 8...</p>
+              <h3>Estética Orofacial</h3>
+              <p>Equilíbrio funcional e visual entre dentes e contornos da face.</p>
               <button class="saiba-mais-btn" 
-                      data-title="Tratamento 8" 
-                      data-description="Descrição detalhada do Tratamento 8." 
+                      data-title="Estética Orofacial" 
+                      data-description="Procedimentos minimamente invasivos que valorizam a beleza natural e complementam a harmonia do sorriso." 
                       data-img="tratamento8.jpg">Saiba Mais</button>
             </div>
           </div>
         </div>
-        <button class="scroll-btn right" aria-label="Direita">❯</button>
+        <button class="scroll-btn right" aria-label="Rolar para direita">❯</button>
       </div>
     </section>
 
+    <!-- Endereço / Localização -->
     <section class="info-container fade-in">
       <div id="endereco" class="endereco info-box">
         <div class="endereco-content">
           <div class="endereco-text">
-            <h2>Endereço:</h2>
-            <p>Rua Arlíndo Silveira, 83 - Conj. Hab. São Deocleciano, São José do Rio Preto - SP, 15057-380</p>
+            <span class="badge-tag">Localização</span>
+            <h2>Visite Nosso Consultório</h2>
+            <p>Instalações preparadas com acessibilidade, facilidade de estacionamento e total discrição para recebê-lo com conforto.</p>
+            <p class="address-highlight"><i class="fa-solid fa-location-dot"></i> Rua Arlíndo Silveira, 83 - Conj. Hab. São Deocleciano, São José do Rio Preto - SP, 15057-380</p>
             <a href="https://wa.link/8b4pun" class="btn-contato" target="_blank" rel="noopener noreferrer">
               <i class="fa-brands fa-whatsapp"></i>
-              Entre em contato
+              Agendar Horário
             </a>
           </div>
           <div class="mapa">
@@ -181,60 +211,64 @@
       </div>
     </section>
 
+    <!-- Equipe / Responsável Técnico -->
     <section class="equipe-section" id="equipe">
       <div class="info-container">
         <div class="info-box">
-          <h2>Nossa Equipe:</h2>
+          <div class="section-header">
+            <span class="badge-tag light">Corpo Clínico</span>
+            <h2>Excelência Profissional</h2>
+            <p>Atendimento humanizado guiado por constante aprimoramento técnico e científico.</p>
+          </div>
           <div class="equipe-members">
             <div class="equipe-member">
-              <img src="tratamento1.jpg" alt="Profissional 1" class="equipe-img">
-              <h3>Nome do Profissional</h3>
-              <p>Descrição do profissional.</p>
-            </div>
-            <div class="equipe-member">
-              <img src="tratamento1.jpg" alt="Profissional 1" class="equipe-img">
-              <h3>Nome do Profissional</h3>
-              <p>Descrição do profissional.</p>
-            </div>
-            <div class="equipe-member">
-              <img src="tratamento1.jpg" alt="Profissional 1" class="equipe-img">
-              <h3>Nome do Profissional</h3>
-              <p>Descrição do profissional.</p>
+              <div class="equipe-img-container">
+                <img src="tratamento1.jpg" alt="Dr. José Zaneboni" class="equipe-img">
+              </div>
+              <h3>Dr. José Zaneboni</h3>
+              <span class="cro-badge">CRO-SP 179225</span>
+              <p>Cirurgião-Dentista responsável com foco em estética avançada, reabilitação oral e odontologia preventiva de alta precisão.</p>
             </div>
           </div>
           <div class="equipe-contato">
             <a href="https://wa.link/8b4pun" class="btn-contato" target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-whatsapp"></i> Agende um Horário!
+              <i class="fab fa-whatsapp"></i> Reserve Sua Avaliação
             </a>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Horário de Funcionamento -->
     <div class="horario-funcionamento">
       <i class="fa-regular fa-clock"></i>
-      <span id="hora-atual"></span> • Horário de Funcionamento: Segunda a Sexta, das <b>09:30 às 19:00</b> - Sábado, das <b>10:00 às 12:30</b>
+      <span id="hora-atual"></span> Horário de Atendimento: Segunda a Sexta, das <b>09:30 às 19:00</b> • Sábado, das <b>10:00 às 12:30</b>
     </div>
 
+    <!-- Modal Popup de Tratamentos -->
     <div class="popup" id="tratamento-popup">
       <div class="popup-content">
         <button class="popup-close" aria-label="Fechar popup"></button>
         <h2 class="popup-title"></h2>
         <img class="popup-img" src="" alt="Imagem do tratamento"/>
         <p class="popup-description"></p>
+        <a href="https://wa.link/8b4pun" class="btn-contato popup-cta" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-whatsapp"></i> Saber Mais via WhatsApp
+        </a>
       </div>
     </div>
 
+    <!-- Footer Institucional -->
     <footer class="footer-institucional">
       <div id="sobre" class="footer-container">
         <div class="footer-col logo-col">
-          <a href="index.html" aria-label="Odontologia Reishtatter">
-            <img src="bg.png" alt="Logo" class="footer-logo" />
-          </a>
-          <p><a href="index.html" aria-label="Odontologia Reishtatter">Odontologia Reishtatter</a></p>
+          <h3 class="footer-brand">Dr. José Zaneboni</h3>
+          <p class="footer-tagline">Cirurgião-Dentista | CRO-SP 179225</p>
+          <p class="footer-summary">Cuidado odontológico contemporâneo, centrado na saúde, bem-estar e autenticidade de cada sorriso.</p>
         </div>
         <div class="footer-col contato-info">
-          <h3>Contacte-se Conosco:</h3>
+          <h3>Fale Conosco</h3>
+          <p><i class="fa-solid fa-phone"></i> (17) 99732-8972</p>
           <div class="social-icons">
             <a href="https://wa.link/8b4pun" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <i class="fab fa-whatsapp"></i>
@@ -243,30 +277,27 @@
               <i class="fab fa-instagram"></i>
             </a>
           </div>
-          <p><i class="fa-solid fa-phone"></i> (17) 99732-8972</p>
         </div>
         <div class="footer-col institucional-links">
-          <h3>Links:</h3>
+          <h3>Navegação</h3>
           <p><a href="#sobre-consultorio">Quem Somos</a></p>
           <p><a href="#tratamentos">Tratamentos</a></p>
           <p><a href="#endereco">Endereço</a></p>
           <p><a href="#equipe">Sobre</a></p>
         </div>
         <div class="footer-col local-links">
-          <h3>Local:</h3>
-          <p><i class="fa-solid fa-building"></i><a href="#endereco"> Odontologia Reishtatter: Consultório Odontoclínica</a></p>
-          <p><i class="fa-solid fa-location-dot"></i><a href="https://maps.app.goo.gl/hDgCAGaxB2rLzWqa8" target="_blank" rel="noopener noreferrer"> R. Arlindo Silveira, nº 83 - Conj. Hab. São Deocleciano, São José do Rio Preto - SP, 15057-380</a></p>
+          <h3>Consultório</h3>
+          <p><i class="fa-solid fa-location-dot"></i><a href="https://maps.app.goo.gl/hDgCAGaxB2rLzWqa8" target="_blank" rel="noopener noreferrer"> Rua Arlíndo Silveira, 83 - Conj. Hab. São Deocleciano, São José do Rio Preto - SP</a></p>
         </div>
       </div>
       <div class="footer-bottom">
         <div class="footer-bottom-content">
-          <p>CNPJ 00.000.000/0000-00 | RT: Dr. Nome - CRO/SP</p>
-          <p>Desenvolvido por <a href="#">Sua Agência</a></p>
-          <p>© 2025 Nome do Consultório. Todos os direitos reservados.</p>
+          <p>CNPJ 00.000.000/0000-00 • RT: Dr. José Zaneboni - CRO-SP 179225</p>
+          <p>© 2026 Dr. José Zaneboni. Todos os direitos reservados.</p>
         </div>
       </div>
       <button id="btn-top" aria-label="Voltar ao topo">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" fill="none"
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="22" height="22" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
              viewBox="0 0 24 24">
           <polyline points="18 15 12 9 6 15"></polyline>
