@@ -808,13 +808,65 @@ img {
   margin-bottom: 14px;
 }
 
-.popup-img {
+.popup-carousel-container {
+  position: relative;
   width: 100%;
   height: 240px;
-  object-fit: cover;
-  border-radius: var(--radius-md);
   margin-bottom: 16px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: transparent; /* Fundo transparente para remover as bordas bege */
 }
+
+.popup-carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.popup-carousel-track img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Aqui está o segredo: exibe a imagem inteira sem cortes */
+  object-position: center; /* Garante que ela fique exatamente no meio */
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.popup-carousel-track img.active {
+  opacity: 1;
+}
+
+.popup-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-dark);
+  border: none;
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.popup-carousel-btn:hover {
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+.popup-carousel-btn.prev-btn { left: 10px; }
+.popup-carousel-btn.next-btn { right: 10px; }
 
 .popup-description {
   font-size: 14.5px;

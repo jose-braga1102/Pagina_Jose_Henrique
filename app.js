@@ -201,37 +201,65 @@ btnTop.addEventListener("click", () => {
 });
 
 const popup = document.getElementById("tratamento-popup");
-const popupImg = popup.querySelector(".popup-img");
 const popupTitle = popup.querySelector(".popup-title");
 const popupDescription = popup.querySelector(".popup-description");
 const popupClose = popup.querySelector(".popup-close");
 const saibaMaisButtons = document.querySelectorAll(".saiba-mais-btn");
 
-function lockScroll() {
-  document.body.classList.add("no-scroll");
-  document.addEventListener('touchmove', preventDefaultScroll, { passive: false });
-  document.addEventListener('wheel', preventDefaultScroll, { passive: false });
-}
-
-function unlockScroll() {
-  document.body.classList.remove("no-scroll");
-  document.removeEventListener('touchmove', preventDefaultScroll);
-  document.removeEventListener('wheel', preventDefaultScroll);
-}
-
-function preventDefaultScroll(e) {
-  e.preventDefault();
-}
+// Novas variáveis para o carrossel do popup
+const popupTrack = popup.querySelector(".popup-carousel-track");
+const popupPrev = popup.querySelector(".prev-btn");
+const popupNext = popup.querySelector(".next-btn");
+let popupImagesList = [];
+let popupCurrentIdx = 0;
 
 saibaMaisButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    popupImg.src = btn.dataset.img;
-    popupImg.alt = btn.dataset.title;
     popupTitle.textContent = btn.dataset.title || "Tratamento";
     popupDescription.textContent = btn.dataset.description || "Descrição do tratamento.";
+    
+    const imgsData = btn.dataset.img || "slide1.jpeg";
+    popupImagesList = imgsData.split(',').map(img => img.trim());
+    popupCurrentIdx = 0;
+    
+    popupTrack.innerHTML = '';
+    popupImagesList.forEach((src, idx) => {
+      const imgEl = document.createElement('img');
+      imgEl.src = src;
+      imgEl.alt = btn.dataset.title;
+      if(idx === 0) imgEl.classList.add('active');
+      popupTrack.appendChild(imgEl);
+    });
+    
+    if(popupImagesList.length > 1) {
+      popupPrev.style.display = 'flex';
+      popupNext.style.display = 'flex';
+    } else {
+      popupPrev.style.display = 'none';
+      popupNext.style.display = 'none';
+    }
+
     popup.classList.add("active");
     lockScroll();
   });
+});
+
+function updatePopupCarousel() {
+  const imgs = popupTrack.querySelectorAll('img');
+  imgs.forEach((img, idx) => {
+    img.classList.remove('active');
+    if(idx === popupCurrentIdx) img.classList.add('active');
+  });
+}
+
+popupPrev.addEventListener('click', () => {
+  popupCurrentIdx = (popupCurrentIdx - 1 + popupImagesList.length) % popupImagesList.length;
+  updatePopupCarousel();
+});
+
+popupNext.addEventListener('click', () => {
+  popupCurrentIdx = (popupCurrentIdx + 1) % popupImagesList.length;
+  updatePopupCarousel();
 });
 
 popupClose.addEventListener("click", () => {
@@ -253,21 +281,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-document.querySelectorAll('.footer-col.institucional-links a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href').substring(1);
-    const targetElement = document.getElementById(targetId);
-    const navbarHeight = 70;
-    const offset = 30;
-    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight - offset;
-    window.scrollTo({
-      top: targetPosition,
-      behavior: 'smooth'
-    });
-  });
-});
-// Alternador automático de imagens para os cards de tratamentos
+// Alternador automático de imagens para os cards de tratamentos (Mini Carrossel)
 document.addEventListener('DOMContentLoaded', () => {
   const miniCarousels = document.querySelectorAll('.mini-carousel');
   
@@ -275,13 +289,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = carousel.querySelectorAll('.mini-img');
     let currentIdx = 0;
     
-    // Só roda o carrossel se tiver mais de 1 imagem no card
+    // Só roda o carrossel se tiver mais de 1 imagem
     if (images.length > 1) {
       setInterval(() => {
         images[currentIdx].classList.remove('active');
         currentIdx = (currentIdx + 1) % images.length;
         images[currentIdx].classList.add('active');
-      }, 3500); // 3500 = 3,5 segundos. Pode alterar esse tempo se quiser mais rápido ou devagar.
+      }, 3500); // Troca a imagem a cada 3,5 segundos
     }
   });
 });

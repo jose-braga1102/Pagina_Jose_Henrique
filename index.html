@@ -121,18 +121,22 @@
               <button class="saiba-mais-btn" 
                       data-title="Lentes de Contato Dental" 
                       data-description="Procedimento estético refinado que corrige imperfeições de cor, formato e proporções dos dentes com máxima preservação biológica." 
-                      data-img="lentes1.jpeg">Saiba Mais</button>
+                      data-img="lentes1.jpeg,lentes2.jpeg,lentes3.jpeg,lentes4.jpeg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
-            <img src="tratamento3.jpg" alt="Clareamento Dental"/>
+            <div class="mini-carousel">
+              <img src="clareamento1.jpeg" alt="Clareamento Dental" class="mini-img active"/>
+              <img src="clareamento2.jpeg" alt="Clareamento Dental" class="mini-img"/>
+              <img src="clareamento3.jpeg" alt="Clareamento Dental" class="mini-img"/>
+            </div>
             <div class="tratamento-info">
               <h3>Clareamento Dental</h3>
               <p>Técnicas modernas para iluminar seu sorriso com segurança e conforto.</p>
               <button class="saiba-mais-btn" 
                       data-title="Clareamento Dental" 
                       data-description="Protocolos em consultório e combinados para promover um sorriso mais jovem e luminoso sem comprometer a sensibilidade." 
-                      data-img="tratamento3.jpg">Saiba Mais</button>
+                      data-img="lentes1.jpeg,lentes2.jpeg,lentes3.jpeg,lentes4.jpeg">Saiba Mais</button>
             </div>
           </div>
           <div class="tratamento-item">
@@ -255,7 +259,11 @@
       <div class="popup-content">
         <button class="popup-close" aria-label="Fechar popup"></button>
         <h2 class="popup-title"></h2>
-        <img class="popup-img" src="" alt="Imagem do tratamento"/>
+        <div class="popup-carousel-container">
+          <div class="popup-carousel-track"></div>
+          <button class="popup-carousel-btn prev-btn" aria-label="Anterior">❮</button>
+          <button class="popup-carousel-btn next-btn" aria-label="Próximo">❯</button>
+        </div>
         <p class="popup-description"></p>
         <a href="https://wa.me/5517982170346" class="btn-contato popup-cta" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-whatsapp"></i> Saber Mais via WhatsApp
