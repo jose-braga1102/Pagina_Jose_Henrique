@@ -1134,3 +1134,27 @@ img {
     flex: 0 0 85vw;
   }
 }
+.mini-carousel {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+}
+
+.mini-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* Força o alinhamento da imagem para o centro exato */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  margin: 0;
+  padding: 0;
+}
+
+.mini-img.active {
+  opacity: 1;
+}

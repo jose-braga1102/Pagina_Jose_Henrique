@@ -267,3 +267,21 @@ document.querySelectorAll('.footer-col.institucional-links a').forEach(link => {
     });
   });
 });
+// Alternador automático de imagens para os cards de tratamentos
+document.addEventListener('DOMContentLoaded', () => {
+  const miniCarousels = document.querySelectorAll('.mini-carousel');
+  
+  miniCarousels.forEach(carousel => {
+    const images = carousel.querySelectorAll('.mini-img');
+    let currentIdx = 0;
+    
+    // Só roda o carrossel se tiver mais de 1 imagem no card
+    if (images.length > 1) {
+      setInterval(() => {
+        images[currentIdx].classList.remove('active');
+        currentIdx = (currentIdx + 1) % images.length;
+        images[currentIdx].classList.add('active');
+      }, 3500); // 3500 = 3,5 segundos. Pode alterar esse tempo se quiser mais rápido ou devagar.
+    }
+  });
+});
