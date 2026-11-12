@@ -498,7 +498,7 @@ img {
 
 .tratamentos-container-wrapper {
   position: relative;
-  max-width: 1300px;
+  max-width: 1400px; /* Limite aumentado para acomodar os 4 cards centralizados */
   margin: 0 auto;
   padding: 0 40px;
 }
@@ -808,14 +808,15 @@ img {
   margin-bottom: 14px;
 }
 
+/* 1. Aumentamos a altura para a foto não ficar "espremida" no meio */
 .popup-carousel-container {
   position: relative;
   width: 100%;
-  height: 240px;
+  height: 350px; /* Altura ideal para fotos odontológicas */
   margin-bottom: 16px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-md); /* Garante as pontas arredondadas */
   overflow: hidden;
-  background-color: transparent; /* Fundo transparente para remover as bordas bege */
+  background-color: var(--bg-surface);
 }
 
 .popup-carousel-track {
@@ -824,14 +825,17 @@ img {
   height: 100%;
 }
 
+/* 2. Deixamos a imagem preencher 100% do espaço */
 .popup-carousel-track img {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Aqui está o segredo: exibe a imagem inteira sem cortes */
-  object-position: center; /* Garante que ela fique exatamente no meio */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza a imagem perfeitamente no meio do modal */
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-md); /* Aplica o arredondamento direto nas pontas da foto */
   opacity: 0;
   transition: opacity 0.4s ease-in-out;
 }

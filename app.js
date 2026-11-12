@@ -299,3 +299,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// Auto-centralizar os cards de tratamento e ocultar botões se couberem na tela
+function ajustarCardsTratamento() {
+  const container = document.getElementById('tratamentos-scroll');
+  const btnLeft = document.querySelector('.scroll-btn.left');
+  const btnRight = document.querySelector('.scroll-btn.right');
+  
+  if (!container || !btnLeft || !btnRight) return;
+
+  // Verifica se o conteúdo total dos cards é menor ou igual à largura visível da tela
+  if (container.scrollWidth <= container.clientWidth + 5) {
+    // Cabe na tela: Centraliza e esconde as setinhas
+    container.style.justifyContent = 'center';
+    btnLeft.style.display = 'none';
+    btnRight.style.display = 'none';
+  } else {
+    // Não cabe na tela (celular/tablet): Volta o scroll para a esquerda e mostra as setinhas
+    container.style.justifyContent = 'flex-start';
+    btnLeft.style.display = ''; 
+    btnRight.style.display = '';
+  }
+}
+
+// O sistema faz a checagem ao carregar a página e toda vez que o paciente girar a tela ou redimensionar a janela
+window.addEventListener('load', ajustarCardsTratamento);
+window.addEventListener('resize', ajustarCardsTratamento);
