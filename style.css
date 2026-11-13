@@ -393,6 +393,14 @@ img {
   transition: transform 0.6s ease;
 }
 
+/* Altura específica para o mini-carrossel da seção Sobre */
+/* Altura específica e forçada para o mini-carrossel da secção Sobre */
+.quemsomos-image .sobre-carousel {
+  height: 420px !important;
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
 .quemsomos-image img:hover {
   transform: scale(1.03);
 }
@@ -1057,6 +1065,31 @@ img {
   transition: 0.3s;
 }
 
+/* Garante que o carrossel Sobre consiga empilhar as imagens */
+.quemsomos-image .sobre-carousel {
+  position: relative !important;
+  overflow: hidden;
+}
+
+/* Aplica o fade SUAVE apenas nas imagens do Sobre o Consultório */
+.quemsomos-image .sobre-carousel img {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out !important; /* Controla a suavidade da transição */
+  z-index: 1;
+}
+
+/* Destaca a imagem ativa no carrossel Sobre */
+.quemsomos-image .sobre-carousel img.active {
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN (MOBILE & TABLET)
    ========================================================================== */
@@ -1149,6 +1182,10 @@ img {
     height: 300px;
   }
 
+  .sobre-carousel {
+    height: 300px !important;
+  }
+
   .mapa iframe {
     height: 300px;
   }
@@ -1157,9 +1194,13 @@ img {
     padding: 0 10px;
   }
 
-  .scroll-btn {
-    display: none;
+.scroll-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
   }
+  .scroll-btn.left { left: 5px; }
+  .scroll-btn.right { right: 5px; }
 
   .tratamento-item {
     flex: 0 0 280px;
@@ -1214,3 +1255,4 @@ img {
 .mini-img.active {
   opacity: 1;
 }
+
