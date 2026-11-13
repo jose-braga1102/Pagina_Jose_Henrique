@@ -1,327 +1,349 @@
+// ==========================================================================
+// MOBILE NAVIGATION MENU
+// ==========================================================================
 const hamburger = document.querySelector(".hamburger");
 const nav = document.querySelector(".nav");
 const navLinks = document.querySelectorAll(".nav-list a");
 
-const scrollContainer = document.getElementById("tratamentos-scroll");
-const tratamentoItems = scrollContainer.querySelectorAll('.tratamento-item');
-tratamentoItems.forEach(item => {
-  item.draggable = false;
-});
+if (hamburger && nav) {
+  hamburger.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    const expanded = nav.classList.contains("active");
+    hamburger.setAttribute("aria-expanded", expanded);
+  });
 
-hamburger.addEventListener("click", () => {
-  nav.classList.toggle("active");
-  const expanded = nav.classList.contains("active");
-  hamburger.setAttribute("aria-expanded", expanded);
-});
-
-navLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href').substring(1);
-    const targetElement = document.getElementById(targetId);
-    
-    if (targetElement) {
-      const navbarHeight = 70;
-      const offset = 30;
-      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight - offset;
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
       
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
-    
-    nav.classList.remove("active");
-    hamburger.setAttribute("aria-expanded", false);
-  });
-});
-
-const slides = document.querySelectorAll(".carousel-img");
-const nextBtn = document.querySelector(".next");
-const prevBtn = document.querySelector(".prev");
-let current = 0;
-
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.remove("active");
-    if (i === index) {
-      slide.classList.add("active");
-    }
+      if (targetElement) {
+        const navbarHeight = 72;
+        const offset = 16;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+      
+      nav.classList.remove("active");
+      hamburger.setAttribute("aria-expanded", false);
+    });
   });
 }
 
-if (slides.length > 0) {
-  showSlide(current);
-}
+// ==========================================================================
+// HERO CAROUSEL WITH FADE EFFECT
+// ==========================================================================
+const heroCarousel = document.querySelector(".hero .carousel");
+if (heroCarousel) {
+  const slides = heroCarousel.querySelectorAll(".carousel-img");
+  const nextBtn = heroCarousel.querySelector(".next");
+  const prevBtn = heroCarousel.querySelector(".prev");
+  let current = 0;
+  let heroInterval = null;
 
-nextBtn.addEventListener("click", () => {
-  current = (current + 1) % slides.length;
-  showSlide(current);
-});
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+  }
 
-prevBtn.addEventListener("click", () => {
-  current = (current - 1 + slides.length) % slides.length;
-  showSlide(current);
-});
-
-if (!window.carouselInterval) {
-  window.carouselInterval = setInterval(() => {
+  function nextSlide() {
     current = (current + 1) % slides.length;
     showSlide(current);
-  }, 5000);
+  }
+
+  function prevSlide() {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  }
+
+  if (slides.length > 0) {
+    showSlide(current);
+  }
+
+  if (nextBtn && prevBtn) {
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+      resetHeroTimer();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      prevSlide();
+      resetHeroTimer();
+    });
+  }
+
+  function startHeroTimer() {
+    if (slides.length > 1) {
+      heroInterval = setInterval(nextSlide, 5000);
+    }
+  }
+
+  function resetHeroTimer() {
+    clearInterval(heroInterval);
+    startHeroTimer();
+  }
+
+  startHeroTimer();
+
+  // Mobile Touch Swipe for Hero Carousel
+  let heroStartX = 0;
+  heroCarousel.addEventListener('touchstart', (e) => {
+    heroStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  heroCarousel.addEventListener('touchend', (e) => {
+    const diffX = heroStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diffX) > 40) {
+      if (diffX > 0) nextSlide();
+      else prevSlide();
+      resetHeroTimer();
+    }
+  }, { passive: true });
 }
 
-const faders = document.querySelectorAll(".fade-in");
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-
-faders.forEach(fader => appearOnScroll.observe(fader));
-
-const btnLeft = document.querySelector(".scroll-btn.left");
-const btnRight = document.querySelector(".scroll-btn.right");
-
-document.addEventListener('DOMContentLoaded', () => {
-  const scrollContainer = document.getElementById('tratamentos-scroll');
-  const leftBtn = document.querySelector('.scroll-btn.left');
-  const rightBtn = document.querySelector('.scroll-btn.right');
-
-  function getScrollAmount() {
-    const item = scrollContainer.querySelector('.tratamento-item');
-    if (item) {
-      const styles = window.getComputedStyle(item);
-      const marginLeft = parseFloat(styles.marginLeft) || 0;
-      const marginRight = parseFloat(styles.marginRight) || 0;
-      return item.offsetWidth + marginLeft + marginRight;
-    }
-    return 350;
-  }
-
-  function snapToNearestItem() {
-    const scrollAmount = getScrollAmount();
-    const currentScroll = scrollContainer.scrollLeft;
-    const nearestItemIndex = Math.round(currentScroll / scrollAmount);
-    scrollContainer.scrollTo({
-      left: nearestItemIndex * scrollAmount,
-      behavior: 'smooth'
-    });
-  }
-
-  scrollContainer.scrollTo({
-    left: 0,
-    behavior: 'smooth'
-  });
-
-  leftBtn.addEventListener('click', () => {
-    const scrollAmount = getScrollAmount();
-    scrollContainer.scrollBy({
-      left: -scrollAmount,
-      behavior: 'smooth'
-    });
-  });
-
-  rightBtn.addEventListener('click', () => {
-    const scrollAmount = getScrollAmount();
-    scrollContainer.scrollBy({
-      left: scrollAmount,
-      behavior: 'smooth'
-    });
-  });
-
-  const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-  if (!isTouchDevice()) {
-    let isDragging = false;
-    let startX;
-    let scrollLeft;
-
-    scrollContainer.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      scrollContainer.classList.add('grabbing');
-      startX = e.pageX - scrollContainer.offsetLeft;
-      scrollLeft = scrollContainer.scrollLeft;
-    });
-
-    scrollContainer.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const x = e.pageX - scrollContainer.offsetLeft;
-      const walk = (x - startX);
-      scrollContainer.scrollLeft = scrollLeft - walk;
-    });
-
-    scrollContainer.addEventListener('mouseup', () => {
-      isDragging = false;
-      scrollContainer.classList.remove('grabbing');
-      snapToNearestItem();
-    });
-
-    scrollContainer.addEventListener('mouseleave', () => {
-      if (isDragging) {
-        isDragging = false;
-        scrollContainer.classList.remove('grabbing');
-        snapToNearestItem();
-      }
-    });
-  }
-
-  scrollContainer.addEventListener('scroll', () => {
-    clearTimeout(scrollContainer.scrollTimeout);
-    scrollContainer.scrollTimeout = setTimeout(snapToNearestItem, 100);
-  });
-
-  window.addEventListener('resize', () => {
-    scrollContainer.scrollTo({
-      left: 0,
-      behavior: 'smooth'
-    });
-  });
-});
-
-const btnTop = document.getElementById("btn-top");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    btnTop.classList.add("show");
-  } else {
-    btnTop.classList.remove("show");
-  }
-});
-
-btnTop.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-});
-
-const popup = document.getElementById("tratamento-popup");
-const popupTitle = popup.querySelector(".popup-title");
-const popupDescription = popup.querySelector(".popup-description");
-const popupClose = popup.querySelector(".popup-close");
-const saibaMaisButtons = document.querySelectorAll(".saiba-mais-btn");
-
-// Novas variáveis para o carrossel do popup
-const popupTrack = popup.querySelector(".popup-carousel-track");
-const popupPrev = popup.querySelector(".prev-btn");
-const popupNext = popup.querySelector(".next-btn");
-let popupImagesList = [];
-let popupCurrentIdx = 0;
-
-saibaMaisButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    popupTitle.textContent = btn.dataset.title || "Tratamento";
-    popupDescription.textContent = btn.dataset.description || "Descrição do tratamento.";
-    
-    const imgsData = btn.dataset.img || "slide1.jpeg";
-    popupImagesList = imgsData.split(',').map(img => img.trim());
-    popupCurrentIdx = 0;
-    
-    popupTrack.innerHTML = '';
-    popupImagesList.forEach((src, idx) => {
-      const imgEl = document.createElement('img');
-      imgEl.src = src;
-      imgEl.alt = btn.dataset.title;
-      if(idx === 0) imgEl.classList.add('active');
-      popupTrack.appendChild(imgEl);
-    });
-    
-    if(popupImagesList.length > 1) {
-      popupPrev.style.display = 'flex';
-      popupNext.style.display = 'flex';
-    } else {
-      popupPrev.style.display = 'none';
-      popupNext.style.display = 'none';
-    }
-
-    popup.classList.add("active");
-    lockScroll();
-  });
-});
-
-function updatePopupCarousel() {
-  const imgs = popupTrack.querySelectorAll('img');
-  imgs.forEach((img, idx) => {
-    img.classList.remove('active');
-    if(idx === popupCurrentIdx) img.classList.add('active');
-  });
-}
-
-popupPrev.addEventListener('click', () => {
-  popupCurrentIdx = (popupCurrentIdx - 1 + popupImagesList.length) % popupImagesList.length;
-  updatePopupCarousel();
-});
-
-popupNext.addEventListener('click', () => {
-  popupCurrentIdx = (popupCurrentIdx + 1) % popupImagesList.length;
-  updatePopupCarousel();
-});
-
-popupClose.addEventListener("click", () => {
-  popup.classList.remove("active");
-  unlockScroll();
-});
-
-popup.addEventListener("click", (e) => {
-  if (e.target === popup) {
-    popup.classList.remove("active");
-    unlockScroll();
-  }
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && popup.classList.contains("active")) {
-    popup.classList.remove("active");
-    unlockScroll();
-  }
-});
-
-// Alternador automático de imagens para os cards de tratamentos (Mini Carrossel)
+// ==========================================================================
+// MINI CAROUSELS (SOBRE O CONSULTÓRIO & TRATAMENTO CARDS)
+// ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
   const miniCarousels = document.querySelectorAll('.mini-carousel');
   
   miniCarousels.forEach(carousel => {
     const images = carousel.querySelectorAll('.mini-img');
+    if (images.length <= 1) return;
+
     let currentIdx = 0;
-    
-    // Só roda o carrossel se tiver mais de 1 imagem
-    if (images.length > 1) {
-      setInterval(() => {
-        images[currentIdx].classList.remove('active');
-        currentIdx = (currentIdx + 1) % images.length;
-        images[currentIdx].classList.add('active');
-      }, 3500); // Troca a imagem a cada 3,5 segundos
-    }
+    setInterval(() => {
+      images[currentIdx].classList.remove('active');
+      currentIdx = (currentIdx + 1) % images.length;
+      images[currentIdx].classList.add('active');
+    }, 3800);
   });
 });
 
-// Auto-centralizar os cards de tratamento e ocultar botões se couberem na tela
-function ajustarCardsTratamento() {
-  const container = document.getElementById('tratamentos-scroll');
-  const btnLeft = document.querySelector('.scroll-btn.left');
-  const btnRight = document.querySelector('.scroll-btn.right');
-  
-  if (!container || !btnLeft || !btnRight) return;
+// ==========================================================================
+// FADE-IN ON SCROLL OBSERVER
+// ==========================================================================
+const faders = document.querySelectorAll(".fade-in");
+if ('IntersectionObserver' in window) {
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
 
-  // Verifica se o conteúdo total dos cards é menor ou igual à largura visível da tela
-  if (container.scrollWidth <= container.clientWidth + 5) {
-    // Cabe na tela: Centraliza e esconde as setinhas
-    container.style.justifyContent = 'center';
-    btnLeft.style.display = 'none';
-    btnRight.style.display = 'none';
-  } else {
-    // Não cabe na tela (celular/tablet): Volta o scroll para a esquerda e mostra as setinhas
-    container.style.justifyContent = 'flex-start';
-    btnLeft.style.display = ''; 
-    btnRight.style.display = '';
-  }
+  faders.forEach(fader => appearOnScroll.observe(fader));
+} else {
+  faders.forEach(fader => fader.classList.add("visible"));
 }
 
-// O sistema faz a checagem ao carregar a página e toda vez que o paciente girar a tela ou redimensionar a janela
-window.addEventListener('load', ajustarCardsTratamento);
-window.addEventListener('resize', ajustarCardsTratamento);
+// ==========================================================================
+// TRATAMENTOS HORIZONTAL SCROLL & DRAG
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollContainer = document.getElementById('tratamentos-scroll');
+  const leftBtn = document.querySelector('.scroll-btn.left');
+  const rightBtn = document.querySelector('.scroll-btn.right');
+
+  if (!scrollContainer) return;
+
+  function getScrollAmount() {
+    const item = scrollContainer.querySelector('.tratamento-item');
+    if (item) {
+      const styles = window.getComputedStyle(item);
+      const gap = 20;
+      return item.offsetWidth + gap;
+    }
+    return 300;
+  }
+
+  function updateArrowsVisibility() {
+    if (!leftBtn || !rightBtn) return;
+    const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+    if (maxScroll <= 5) {
+      leftBtn.style.display = 'none';
+      rightBtn.style.display = 'none';
+      scrollContainer.style.justifyContent = 'center';
+    } else {
+      scrollContainer.style.justifyContent = 'flex-start';
+      leftBtn.style.display = scrollContainer.scrollLeft > 10 ? 'flex' : 'none';
+      rightBtn.style.display = scrollContainer.scrollLeft < maxScroll - 10 ? 'flex' : 'none';
+    }
+  }
+
+  if (leftBtn && rightBtn) {
+    leftBtn.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    rightBtn.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+  }
+
+  // Mouse drag functionality for desktop
+  let isDown = false;
+  let startX = 0;
+  let scrollStart = 0;
+
+  scrollContainer.addEventListener('mousedown', (e) => {
+    isDown = true;
+    scrollContainer.classList.add('grabbing');
+    startX = e.pageX - scrollContainer.offsetLeft;
+    scrollStart = scrollContainer.scrollLeft;
+  });
+
+  scrollContainer.addEventListener('mouseleave', () => {
+    isDown = false;
+    scrollContainer.classList.remove('grabbing');
+  });
+
+  scrollContainer.addEventListener('mouseup', () => {
+    isDown = false;
+    scrollContainer.classList.remove('grabbing');
+  });
+
+  scrollContainer.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainer.offsetLeft;
+    const walk = (x - startX) * 1.4;
+    scrollContainer.scrollLeft = scrollStart - walk;
+  });
+
+  scrollContainer.addEventListener('scroll', updateArrowsVisibility);
+  window.addEventListener('resize', updateArrowsVisibility);
+  updateArrowsVisibility();
+});
+
+// ==========================================================================
+// SCROLL TO TOP BUTTON
+// ==========================================================================
+const btnTop = document.getElementById("btn-top");
+if (btnTop) {
+  window.addEventListener("scroll", () => {
+    btnTop.classList.toggle("show", window.scrollY > 350);
+  });
+
+  btnTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+// ==========================================================================
+// MODAL POPUP & DYNAMIC GALLERY
+// ==========================================================================
+const popup = document.getElementById("tratamento-popup");
+if (popup) {
+  const popupTitle = popup.querySelector(".popup-title");
+  const popupDescription = popup.querySelector(".popup-description");
+  const popupClose = popup.querySelector(".popup-close");
+  const popupTrack = popup.querySelector(".popup-carousel-track");
+  const popupPrev = popup.querySelector(".prev-btn");
+  const popupNext = popup.querySelector(".next-btn");
+  const saibaMaisButtons = document.querySelectorAll(".saiba-mais-btn");
+
+  let popupImagesList = [];
+  let popupCurrentIdx = 0;
+
+  function lockScroll() {
+    document.body.classList.add("no-scroll");
+  }
+
+  function unlockScroll() {
+    document.body.classList.remove("no-scroll");
+  }
+
+  function updatePopupCarousel() {
+    const imgs = popupTrack.querySelectorAll('img');
+    imgs.forEach((img, idx) => {
+      img.classList.toggle('active', idx === popupCurrentIdx);
+    });
+  }
+
+  saibaMaisButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      popupTitle.textContent = btn.dataset.title || "Tratamento";
+      popupDescription.textContent = btn.dataset.description || "Descrição do tratamento.";
+      
+      const imgsData = btn.dataset.img || "slide1.jpeg";
+      popupImagesList = imgsData.split(',').map(img => img.trim());
+      popupCurrentIdx = 0;
+      
+      popupTrack.innerHTML = '';
+      popupImagesList.forEach((src, idx) => {
+        const imgEl = document.createElement('img');
+        imgEl.src = src;
+        imgEl.alt = `${btn.dataset.title} - Imagem ${idx + 1}`;
+        if (idx === 0) imgEl.classList.add('active');
+        popupTrack.appendChild(imgEl);
+      });
+      
+      const hasMultiple = popupImagesList.length > 1;
+      popupPrev.style.display = hasMultiple ? 'flex' : 'none';
+      popupNext.style.display = hasMultiple ? 'flex' : 'none';
+
+      popup.classList.add("active");
+      lockScroll();
+    });
+  });
+
+  if (popupPrev && popupNext) {
+    popupPrev.addEventListener('click', () => {
+      popupCurrentIdx = (popupCurrentIdx - 1 + popupImagesList.length) % popupImagesList.length;
+      updatePopupCarousel();
+    });
+
+    popupNext.addEventListener('click', () => {
+      popupCurrentIdx = (popupCurrentIdx + 1) % popupImagesList.length;
+      updatePopupCarousel();
+    });
+  }
+
+  popupClose.addEventListener("click", () => {
+    popup.classList.remove("active");
+    unlockScroll();
+  });
+
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      popup.classList.remove("active");
+      unlockScroll();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && popup.classList.contains("active")) {
+      popup.classList.remove("active");
+      unlockScroll();
+    }
+  });
+}
+
+// ==========================================================================
+// REAL-TIME OFFICE CLOCK (BRASÍLIA TIMEZONE)
+// ==========================================================================
+function updateBusinessHours() {
+  const clockEl = document.getElementById("hora-atual");
+  if (!clockEl) return;
+
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+  clockEl.textContent = `${timeString} •`;
+}
+
+updateBusinessHours();
+setInterval(updateBusinessHours, 30000);
