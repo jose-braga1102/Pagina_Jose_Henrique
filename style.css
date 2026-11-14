@@ -399,7 +399,12 @@ img {
   z-index: 2;
 }
 
-.quemsomos-text,
+.quemsomos-text {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .endereco-text {
   flex: 1.1;
 }
@@ -1159,12 +1164,12 @@ img {
   }
 
   .quemsomos-image {
-    width: 100%;
+    display: none !important;
   }
 
   .quemsomos-image .sobre-carousel {
-    height: auto !important;
-    aspect-ratio: 3 / 2 !important;
+    height: auto;
+    aspect-ratio: 3 / 2;
   }
 
   .mapa iframe {
